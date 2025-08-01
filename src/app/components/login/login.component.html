@@ -1,0 +1,39 @@
+<div class="login">
+    <form [formGroup]="loginForm">
+        <div class="form-group">
+            <label for="email">Email <small class="text-danger">*</small></label>
+            <input type="email" class="form-control" id="email" placeholder="Please enter email"
+                formControlName="email">
+            <div class="text-danger">
+                <small
+                    *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.['required']">Email
+                    is required.</small>
+
+                <small
+                    *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.['email']">Please
+                    enter valid email.</small>
+
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label for="password">Password <small class="text-danger">*</small></label>
+            <input type="password" class="form-control" id="password" placeholder="Please enter password"
+                formControlName="password">
+            <div class="text-danger">
+                <small
+                    *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.['required']">Password
+                    is required.</small>
+
+                <small
+                    *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.['minlength']">Password
+                    should be minimum 8 charactors.</small>
+
+                <small
+                    *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.['maxlength']">Password
+                    should be maximum 20 charactors.</small>
+
+            </div>
+        </div>
+        <button type="button" class="btn btn-dark mt-2" (click)="handleLogin()">Login</button>
+    </form>
+</div>

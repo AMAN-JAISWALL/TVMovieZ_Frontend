@@ -1,0 +1,14 @@
+.add-movies{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 20px;
+    padding: 10px;
+}
+.image_url img{
+    width: 26px;
+    height: 26px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%
+}

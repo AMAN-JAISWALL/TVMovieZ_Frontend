@@ -1,0 +1,83 @@
+<div class="register">
+    <form [formGroup]="registerForm">
+        <div class="form-group">
+            <label for="full_name">Full name <small class="text-danger">*</small></label>
+            <input type="text" class="form-control" id="full_name" placeholder="Please enter full name"
+                formControlName="full_name">
+            <div class="text-danger">
+                <small
+                    *ngIf="registerForm.controls['full_name'].touched && registerForm.controls['full_name'].errors?.['required']">Full
+                    name
+                    is required.</small>
+                <small
+                    *ngIf="registerForm.controls['full_name'].touched && registerForm.controls['full_name'].errors?.['minlength']">
+                    Full name must be at least 3 characters long.
+                </small>
+
+                <small
+                    *ngIf="registerForm.controls['full_name'].touched && registerForm.controls['full_name'].errors?.['maxlength']">Full
+                    name should be maximum 20 charactors. </small>
+
+                <small
+                    *ngIf="registerForm.controls['full_name'].touched && registerForm.controls['full_name'].errors?.['pattern']">
+                    Full name should contain only letters and spaces.
+                </small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email <small class="text-danger">*</small></label>
+            <input type="email" class="form-control" id="email" placeholder="Please enter email"
+                formControlName="email">
+
+            <div class="text-danger">
+                <small
+                    *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['required']">Email
+                    is required.</small>
+
+                <small
+                    *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['email']">Please
+                    enter valid email.</small>
+
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="password">Password <small class="text-danger">*</small></label>
+            <input type="password" class="form-control" id="password" placeholder="Please enter password"
+                formControlName="password">
+            <div class="text-danger">
+                <small
+                    *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['required']">Password
+                    is required.</small>
+
+                <small
+                    *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['minlength']">Password
+                    should be minimum 8 charactors.</small>
+
+                <small
+                    *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['maxlength']">Password
+                    should be maximum 20 charactors.</small>
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="confirmation_password">Confirmation Password <small class="text-danger">*</small></label>
+            <input type="text" class="form-control" id="confirmation_password"
+                placeholder="Please enter confirmation password" formControlName="confirmation_password">
+
+            <div class="text-danger">
+                <small
+                    *ngIf="registerForm.controls['confirmation_password'].touched && registerForm.controls['confirmation_password'].errors?.['required']">Confirmation
+                    password
+                    is required.</small>
+                <small
+                    *ngIf="registerForm.controls['confirmation_password'].touched && registerForm.errors?.['passwordMismatch']">
+                    Password and Confirm Password do not match.
+                </small>
+            </div>
+        </div>
+        <button type="button" class="btn btn-dark mt-2" (click)="handleRegister()">Sign up</button>
+    </form>
+</div>

@@ -1,0 +1,224 @@
+<div class="home">
+
+    <div class="add-movies">
+        <button class="btn btn-dark" (click)="openModal()">
+            Add Movies & Shows
+        </button>
+    </div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Type</th>
+                <th scope="col">Director</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Location</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Year/Time</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let data of allMovies;">
+                <td><span class="image_url"><img src="https://www.myjainsamaj.com/theme/user_avtar.jpeg"
+                            alt=""></span>{{data.title || 'N/A'}}</td>
+                <td>{{data.type || 'N/A'}}</td>
+                <td>{{data.director || 'N/A'}}</td>
+                <td>{{data.budget || 'N/A'}}</td>
+                <td>{{data.location || 'N/A'}}</td>
+                <td>{{data.duration || 'N/A'}}</td>
+                <td>{{data.year_or_time || 'N/A'}}</td>
+                <td>{{data.description || 'N/A'}}</td>
+                <td>
+                    <button class="btn btn-success mx-2" (click)="editMovieHandler(data)">
+                        <i class="fas fa-edit me-1"></i> Edit
+                    </button>
+
+                    <button class="btn btn-danger" (click)="deleteMovieHandler(data)">
+                        <i class="fas fa-trash-alt me-1"></i> Delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="allMovies.length ==0">
+                <td colspan="9" class="text-center text-muted ">
+                    <span class="text-danger">
+                        Data not found.
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="addMovieModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="addMovieModalLabel">{{model_type || ""}} Movies & Shows</h5>
+                <button type="button" class="btn-close text-white" aria-label="Close" (click)="closeModel()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addMoviesForm">
+                    <div class="">
+                        <label for="title" class="col-form-label">Title <small class="text-danger">*</small></label>
+                        <input type="text" class="form-control" id="title" formControlName="title"
+                            placeholder="Please enter title">
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['title'].touched && addMoviesForm.controls['title'].errors?.['required']">Title
+                                is
+                                required.</small>
+                            <small
+                                *ngIf="addMoviesForm.controls['title'].touched && addMoviesForm.controls['title'].errors?.['maxlength']">Title
+                                must be under
+                                255 characters.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="type" class="col-form-label">Type <small class="text-danger">*</small></label>
+                        <select class="form-select" id="type" formControlName="type">
+                            <option value="null">Please select type</option>
+                            <option value="Movie">Movie</option>
+                            <option value="TV Show">TV Show</option>
+                        </select>
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['type'].touched && addMoviesForm.controls['type'].errors?.['required']">Type
+                                is required.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="director" class="col-form-label">Director<small
+                                class="text-danger">*</small></label>
+                        <input type="text" class="form-control" id="director" formControlName="director"
+                            placeholder="Please enter director">
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['director'].touched && addMoviesForm.controls['director'].errors?.['required']">Director
+                                is required.</small>
+
+                            <small
+                                *ngIf="addMoviesForm.controls['director'].touched && addMoviesForm.controls['director'].errors?.['maxlength']">Maximum
+                                100
+                                characters allowed.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="budget" class="col-form-label">Budget (₹)<small
+                                class="text-danger">*</small></label>
+                        <input type="number" class="form-control" id="budget" formControlName="budget"
+                            placeholder="Please enter budget">
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['budget'].touched && addMoviesForm.controls['budget'].errors?.['required']">Budget
+                                is required.</small>
+                            <small
+                                *ngIf="addMoviesForm.controls['budget'].touched && addMoviesForm.controls['budget'].errors?.['min']">Budget
+                                must be a positive
+                                number.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="location" class="col-form-label">Location</label>
+                        <input type="text" class="form-control" id="location" formControlName="location"
+                            placeholder="Please enter location">
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['location'].touched && addMoviesForm.controls['location'].errors?.['maxlength']">Maximum
+                                100
+                                characters allowed.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="duration" class="col-form-label">Duration<small
+                                class="text-danger">*</small></label>
+                        <input type="text" class="form-control" id="duration" formControlName="duration"
+                            placeholder="Please enter duration">
+                        <div class="text-danger">
+                            <small
+                                *ngIf="addMoviesForm.controls['duration'].touched && addMoviesForm.controls['duration'].errors?.['required']">Duration
+                                is required.</small>
+                            <small
+                                *ngIf="addMoviesForm.controls['duration'].touched && addMoviesForm.controls['duration'].errors?.['maxlength']">Maximum
+                                50
+                                characters allowed.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="year_or_time" class="col-form-label">Year / Time</label>
+                        <input type="text" class="form-control" id="year_or_time" formControlName="year_or_time"
+                            placeholder="Please enter Year / Time">
+                        <div class="text-danger">
+                            <small *ngIf="f['year_or_time'].touched && f['year_or_time'].errors?.['maxlength']">Maximum
+                                50 characters allowed.</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label for="description" class="col-form-label">Description</label>
+                        <textarea class="form-control" id="description" rows="3" formControlName="description"
+                            placeholder="Please enter description"></textarea>
+                        <div class="text-danger">
+                            <small *ngIf="f['description'].touched && f['description'].errors?.['maxlength']">Maximum
+                                1000 characters allowed.</small>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="image_url" class="col-form-label">Image</label>
+                        <input type="file" class="form-control" id="image_url" (change)="onImageSelected($event)" />
+                        <div class="text-danger">
+                            <small *ngIf="imageError">Please select a valid image file (jpg, png, jpeg).</small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModel()">Close</button>
+                <button *ngIf="model_type=='Add'" type="button" class="btn btn-dark" (click)="handleAddMovies()">
+                    <span *ngIf="!isAdded">Add</span>
+                    <span *ngIf="isAdded">Adding..</span>
+                    <span *ngIf="isAdded" class="spinner-border text-white"></span>
+                </button>
+
+                <button *ngIf="model_type=='Edit'" type="button" class="btn btn-dark" (click)="handleEditMoviesBTN()">
+                    <span *ngIf="!isEdited">Edit</span>
+                    <span *ngIf="isEdited">Edding..</span>
+                    <span *ngIf="isEdited" class="spinner-border text-white"></span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteModel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Are you sure you want to delete this.</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-dark" (click)="handleDeleteYesBTN()">
+                    <span *ngIf="!isDeleted">Yes</span>
+                    <span *ngIf="isDeleted">Loading..</span>
+                    <span *ngIf="isDeleted" class="spinner-border text-light"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
