@@ -25,6 +25,7 @@ export class LoginComponent {
     password : new FormControl('',[Validators.required, Validators.minLength(8),Validators.maxLength(20)]),
   })
 
+  isLogin:boolean=false;
   handleLogin(){
     if(this.loginForm.invalid){
       this.loginForm.markAllAsTouched();
@@ -35,7 +36,7 @@ export class LoginComponent {
     if(this.loginForm.valid){
       // localStorage.setItem("token",'123123');
       // this._router.navigate(['/home']);
-
+      this.isLogin=true;
       this.loginFun(this.loginForm.value);
     }
   }
@@ -48,12 +49,15 @@ export class LoginComponent {
           this._toastr.success(res.message, "Suceess");
           localStorage.setItem("token",res.token);
           localStorage.setItem("userDetails",JSON.stringify(res.user));
+             this.isLogin=false;
           this._router.navigate(['/home']);
         }else{
+          this.isLogin=false;
           this._toastr.error(res.message || "Something went wront on backend.","Error!")
         }
       },
       (err) => {
+        this.isLogin=false;
         this._toastr.error(err.error.message, "Error!");
       }
     )

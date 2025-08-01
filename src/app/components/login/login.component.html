@@ -34,6 +34,10 @@
 
             </div>
         </div>
-        <button type="button" class="btn btn-dark mt-2" (click)="handleLogin()">Login</button>
+        <button type="button" class="btn btn-dark mt-2" (click)="handleLogin()">
+              <span *ngIf="!isLogin">Login</span>
+                    <span *ngIf="isLogin">Loading..</span>
+                    <span *ngIf="isLogin" class="spinner-border text-light"></span>
+        </button>
     </form>
 </div>

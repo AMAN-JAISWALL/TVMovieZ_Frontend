@@ -78,6 +78,10 @@
                 </small>
             </div>
         </div>
-        <button type="button" class="btn btn-dark mt-2" (click)="handleRegister()">Sign up</button>
+        <button type="button" class="btn btn-dark mt-2" (click)="handleRegister()">
+           <span *ngIf="!isRegister"> Sign up</span>
+           <span *ngIf="isRegister"> Loading...</span> 
+            <span *ngIf="isRegister" class="spinner-border text-light"></span>        
+        </button>
     </form>
 </div>

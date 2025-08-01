@@ -32,7 +32,7 @@ export class RegisterComponent {
     return password === confirm ? null : { passwordMismatch: true };
   }
 
-
+  isRegister:boolean=false;
   handleRegister() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -46,6 +46,7 @@ export class RegisterComponent {
         "email": this.registerForm.get('email')?.value || '',
         "password": this.registerForm.get('password')?.value || '',
       }
+      this.isRegister=true;
       this.registerFun(data);
     }
   }
@@ -55,12 +56,15 @@ export class RegisterComponent {
       (res) => {
         if (res.success && res.message) {
           this._toastr.success(res.message, "Suceess");
+          this.isRegister=false;
           this.registerForm.reset();
         }else{
+          this.isRegister=false;
           this._toastr.error(res.message || "Something went wront on backend.","Error!")
         }
       },
       (err) => {
+        this.isRegister=false;
         this._toastr.error(err.error.message, "Error!");
       }
     )
