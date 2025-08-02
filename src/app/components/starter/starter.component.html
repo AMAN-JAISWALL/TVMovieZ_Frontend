@@ -186,13 +186,13 @@
                 <button *ngIf="model_type=='Add'" type="button" class="btn btn-dark" (click)="handleAddMovies()">
                     <span *ngIf="!isAdded">Add</span>
                     <span *ngIf="isAdded">Adding..</span>
-                    <span *ngIf="isAdded" class="spinner-border text-white"></span>
+                    <span *ngIf="isAdded" class="spinner-border spinner-border-sm text-white"></span>
                 </button>
 
                 <button *ngIf="model_type=='Edit'" type="button" class="btn btn-dark" (click)="handleEditMoviesBTN()">
                     <span *ngIf="!isEdited">Edit</span>
                     <span *ngIf="isEdited">Edding..</span>
-                    <span *ngIf="isEdited" class="spinner-border text-white"></span>
+                    <span *ngIf="isEdited" class="spinner-border spinner-border-sm text-white"></span>
                 </button>
 
             </div>
@@ -216,7 +216,7 @@
                 <button type="button" class="btn btn-dark" (click)="handleDeleteYesBTN()">
                     <span *ngIf="!isDeleted">Yes</span>
                     <span *ngIf="isDeleted">Loading..</span>
-                    <span *ngIf="isDeleted" class="spinner-border text-light"></span>
+                    <span *ngIf="isDeleted" class="spinner-border spinner-border-sm text-light"></span>
                 </button>
             </div>
         </div>

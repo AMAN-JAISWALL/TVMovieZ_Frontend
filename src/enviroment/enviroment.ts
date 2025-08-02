@@ -1,4 +1,5 @@
 export const enviroment= {
     production: true,
-    apiUrl : "https://tvmoviez.onrender.com"
+    // apiUrl : "https://tvmoviez.onrender.com"
+    apiUrl:'http://localhost:3000'
 } 

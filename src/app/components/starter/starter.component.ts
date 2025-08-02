@@ -184,6 +184,12 @@ export class StarterComponent {
 
   isEdited: boolean = false;
   handleEditMoviesBTN() {
+    console.log("value_dirty",this.addMoviesForm.dirty);
+    if(!this.addMoviesForm.dirty){
+       this._toastr.warning("Please change something before updating.", "Warning");
+      return
+    }
+
     this.isEdited = true;
     const data = {
       ...this.addMoviesForm.value,
@@ -195,7 +201,7 @@ export class StarterComponent {
         this.getAllMovies();
         this.isEdited = false;
         this.AddMoviesModel.hide();
-        this.AddMoviesModel.reset();
+        this.addMoviesForm.reset();
       } else {
         this._toastr.error(res.message || "Something went wront on backend.", "Error!")
         this.isEdited = false;
